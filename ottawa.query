@@ -1,0 +1,7 @@
+[timeout:600][maxsize:2000000000];
+(
+  way(area:3604136816)["barrier"];
+  way(area:3604136816)["highway"];
+  node(w);
+);
+out;
