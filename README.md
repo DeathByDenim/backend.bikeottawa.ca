@@ -5,6 +5,7 @@ Set of scripts to generate and sync data files for maps.bikeottawa.ca
 Prerequisites: Node v6, Python v2.7
 ``` 
 git clone https://github.com/zzptichka/backend.bikeottawa.ca
+cd backend.bikeottawa.ca/
 npm install
 pip install --user mapboxcli
 ```
