@@ -8,7 +8,7 @@ OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 MAPBOX=~/.local/bin/mapbox
 
-cd ~/ottbike-maps-backend
+cd ~/backend.bikeottawa.ca
 
 if [ ! -e $OSMFILE ]; then
   echo "Error: Missing OSM file $OSMFILE"
@@ -36,10 +36,10 @@ cp ../ltsanalyzer/levelfiles/level_4.json ./data
 
 echo "\nUploading tilesets to Mapbox...\n"
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoienpwdGljaGthIiwiYSI6ImNqZWFwbXdsMDA4OWkzM2xhdjB0dmZqb2YifQ.sMrDpEWvtIM39hFZqkpLNQ"
-#$MAPBOX upload zzptichka.53bf2frg data/level_1.json
-#$MAPBOX upload zzptichka.771hbw7i data/level_2.json
-#$MAPBOX upload zzptichka.5jgkszgd data/level_3.json
-#$MAPBOX upload zzptichka.4ioiilcy data/level_4.json
+$MAPBOX upload zzptichka.53bf2frg data/level_1.json
+$MAPBOX upload zzptichka.771hbw7i data/level_2.json
+$MAPBOX upload zzptichka.5jgkszgd data/level_3.json
+$MAPBOX upload zzptichka.4ioiilcy data/level_4.json
 
 
 echo "\nPreparing OSM extracts for each LTS...\n"
@@ -74,21 +74,24 @@ $OSRMCONTRACT data/lts3/data.osrm
 echo "  Contracting  data/lts4/data.osrm"
 $OSRMCONTRACT data/lts4/data.osrm
 
-echo "\nDeleting OSM extracts...\n"
+echo "\nDeleting OSM extracts and LTS jsons...\n"
 
 rm data/lts1/data.osm
 rm data/lts2/data.osm
 rm data/lts3/data.osm
 rm data/lts4/data.osm
+rm data/level_1.json
+rm data/level_2.json
+rm data/level_3.json
+rm data/level_4.json
 
-echo "Archiving directories...\n"
-rm -R upload
-mkdir upload
-tar -zcf upload/lts1.tar.gz data/lts1
-tar -zcf upload/lts2.tar.gz data/lts2
-tar -zcf upload/lts3.tar.gz data/lts3
-tar -zcf upload/lts4.tar.gz data/lts4
+
+
+
+echo "Syncing data directory...\n"
+
+rsync -rzaPq -e "ssh -i ~/.ssh/maps_id_rsa" data 172.31.40.27:/home/ubuntu/maps.bikeottawa.ca-backend/
 
 echo "============================================================="
-echo "SUCCESS! Data in data/upload is archived and ready for upload"
+echo "====== SUCCESS! OSRM files in data/ have been synced ========"
 echo "=============================================================\n"
