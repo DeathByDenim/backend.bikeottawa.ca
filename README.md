@@ -1,4 +1,4 @@
-# ottbike-maps-backend
+# backend.bikeottawa.ca
 Set of scripts to generate and sync data files for maps.bikeottawa.ca
 
 ## Installation
