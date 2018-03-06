@@ -11,5 +11,6 @@ pip install --user mapboxcli
 
 ## Running
 Builds OSRM data and syncs it to maps.bikeottawa.ca
-```./build.sh
+```
+./build.sh >> build.log
 ```
