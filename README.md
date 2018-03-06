@@ -1,14 +1,15 @@
 # ottbike-maps-backend
-Backend for ottbike-maps
+Set of scripts to generate and sync data files for maps.bikeottawa.ca
 
-
-wget -O data/ottawa.osm --post-file=ottawa.query "http://overpass-api.de/api/interpreter"
-
-npm install big-xml --python=python2.7
-npm install minimist
-npm install geojson-writer
-
+## Installation
+Prerequisites: Node v6, Python v2.7
+``` 
+git clone https://github.com/zzptichka/backend.bikeottawa.ca
+npm install
 pip install --user mapboxcli
+```
 
-
-./build.sh
+## Running
+Builds OSRM data and syncs it to maps.bikeottawa.ca
+```./build.sh
+```
