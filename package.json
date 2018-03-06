@@ -1,0 +1,25 @@
+{
+  "name": "backend.bikeottawa.ca",
+  "description": "Set of scripts to generate and sync data files for maps.bikeottawa.ca",
+  "version": "5.15.1",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Yaro Shkvorets",
+      "email": "shkvorets@gmail.com",
+      "web": "bikeottawa.ca"
+    }
+  ],
+  "dependencies": {
+    "big-xml": "^1.0.0",
+    "osrm": "5.15.1",
+    "geojson-writer": "^0.3.6",
+    "minimist": "^1.2.0"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git://github.com/zzptichka/backend.bikeottawa.ca.git"
+    }
+  ]
+}
