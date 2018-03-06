@@ -43,6 +43,9 @@ $MAPBOX upload zzptichka.4ioiilcy data/level_4.json
 
 
 echo "\nPreparing OSM extracts for each LTS...\n"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm use 6
 mkdir data/lts1
 mkdir data/lts2
 mkdir data/lts3
