@@ -7,6 +7,7 @@ OSMFILE=~/ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./node_modules/osrm/profiles/bicycle.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 MAPBOX=~/.local/bin/mapbox
+export MAPBOX_ACCESS_TOKEN="SET_YOUR_ACCESS_TOKEN_WITH_WRITE_ACCESS_HERE"
 
 cd ~/backend.bikeottawa.ca
 
