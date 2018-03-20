@@ -36,7 +36,6 @@ cp ../ltsanalyzer/levelfiles/level_3.json ./data
 cp ../ltsanalyzer/levelfiles/level_4.json ./data
 
 echo "\nUploading tilesets to Mapbox...\n"
-export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoienpwdGljaGthIiwiYSI6ImNqZWFwbXdsMDA4OWkzM2xhdjB0dmZqb2YifQ.sMrDpEWvtIM39hFZqkpLNQ"
 $MAPBOX upload zzptichka.53bf2frg data/level_1.json
 $MAPBOX upload zzptichka.771hbw7i data/level_2.json
 $MAPBOX upload zzptichka.5jgkszgd data/level_3.json
