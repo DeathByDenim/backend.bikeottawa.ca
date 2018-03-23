@@ -7,6 +7,7 @@ OSMFILE=~/ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 MAPBOX=~/.local/bin/mapbox
+export MAPBOX_ACCESS_TOKEN="SET_YOUR_ACCESS_TOKEN_WITH_WRITE_ACCESS_HERE"
 
 cd ~/backend.bikeottawa.ca
 
@@ -35,7 +36,6 @@ cp ../ltsanalyzer/levelfiles/level_3.json ./data
 cp ../ltsanalyzer/levelfiles/level_4.json ./data
 
 echo "\nUploading tilesets to Mapbox...\n"
-export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoienpwdGljaGthIiwiYSI6ImNqZWFwbXdsMDA4OWkzM2xhdjB0dmZqb2YifQ.sMrDpEWvtIM39hFZqkpLNQ"
 $MAPBOX upload zzptichka.53bf2frg data/level_1.json
 $MAPBOX upload zzptichka.771hbw7i data/level_2.json
 $MAPBOX upload zzptichka.5jgkszgd data/level_3.json
@@ -43,6 +43,9 @@ $MAPBOX upload zzptichka.4ioiilcy data/level_4.json
 
 
 echo "\nPreparing OSM extracts for each LTS...\n"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm use 6
 mkdir data/lts1
 mkdir data/lts2
 mkdir data/lts3
