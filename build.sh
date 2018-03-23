@@ -60,7 +60,9 @@ echo "  Generating  data/lts4/data.osm"
 node prepare-osm.js $OSMFILE 4 > data/lts4/data.osm
 
 echo "\nRunning OSRM scripts...\n"
-ln -s ./node_modules/osrm/profiles/lib
+if [ ! -e lib ]; then
+  ln -s ./node_modules/osrm/profiles/lib
+fi
 echo "  Extracting  data/lts1/data.osrm"
 $OSRMEXTRACT data/lts1/data.osm
 echo "  Extracting  data/lts2/data.osrm"
