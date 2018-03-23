@@ -4,7 +4,7 @@ echo "Starting routing build on `date`"
 echo "========================================================"
 
 OSMFILE=~/ltsanalyzer/update/rmoc.osm
-OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./node_modules/osrm/profiles/bicycle.lua"
+OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 MAPBOX=~/.local/bin/mapbox
 
@@ -57,6 +57,7 @@ echo "  Generating  data/lts4/data.osm"
 node prepare-osm.js $OSMFILE 4 > data/lts4/data.osm
 
 echo "\nRunning OSRM scripts...\n"
+ln -s ./node_modules/osrm/profiles/lib
 echo "  Extracting  data/lts1/data.osrm"
 $OSRMEXTRACT data/lts1/data.osm
 echo "  Extracting  data/lts2/data.osrm"
