@@ -3,13 +3,14 @@ echo "\n========================================================"
 echo "Starting routing build on `date`"
 echo "========================================================"
 
-OSMFILE=~/ltsanalyzer/update/rmoc.osm
+OSMFILE=../ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
-MAPBOX=~/.local/bin/mapbox
-export MAPBOX_ACCESS_TOKEN="SET_YOUR_ACCESS_TOKEN_WITH_WRITE_ACCESS_HERE"
+#MAPBOX="mapbox"                 #for Mac
+MAPBOX="~/.local/bin/mapbox"   #for Linux
+export MAPBOX_ACCESS_TOKEN="PASTE YOUR MAPBOX TOKEN WITH WRITE ACCESS HERE"
 
-cd ~/backend.bikeottawa.ca
+#cd ~/backend.bikeottawa.ca
 
 if [ ! -e $OSMFILE ]; then
   echo "Error: Missing OSM file $OSMFILE"
@@ -36,10 +37,10 @@ cp ../ltsanalyzer/levelfiles/level_3.json ./data
 cp ../ltsanalyzer/levelfiles/level_4.json ./data
 
 echo "\nUploading tilesets to Mapbox...\n"
-$MAPBOX upload zzptichka.53bf2frg data/level_1.json
-$MAPBOX upload zzptichka.771hbw7i data/level_2.json
-$MAPBOX upload zzptichka.5jgkszgd data/level_3.json
-$MAPBOX upload zzptichka.4ioiilcy data/level_4.json
+$MAPBOX upload bikeottawa.7gev94ax data/level_1.json
+$MAPBOX upload bikeottawa.2p4cgvm3 data/level_2.json
+$MAPBOX upload bikeottawa.42dlr9v2 data/level_3.json
+$MAPBOX upload bikeottawa.0ne8pnv3 data/level_4.json
 
 
 echo "\nPreparing OSM extracts for each LTS...\n"
@@ -96,7 +97,7 @@ rm data/level_4.json
 
 echo "Syncing data directory...\n"
 
-rsync -rzaPq -e "ssh -i ~/.ssh/maps_id_rsa" data 172.31.40.27:/home/ubuntu/maps.bikeottawa.ca-backend/
+rsync -rzaPq -e "ssh -i ~/.ssh/maps_id_rsa" data maps.bikeottawa.ca:/home/ubuntu/maps.bikeottawa.ca-backend/
 
 echo "============================================================="
 echo "====== SUCCESS! OSRM files in data/ have been synced ========"
