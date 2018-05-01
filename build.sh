@@ -6,8 +6,8 @@ echo "========================================================"
 OSMFILE=../ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
-#MAPBOX="mapbox"                 #for Mac
-MAPBOX="~/.local/bin/mapbox"   #for Linux
+#MAPBOX=mapbox                 #for Mac
+MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="PASTE YOUR MAPBOX TOKEN WITH WRITE ACCESS HERE"
 
 #cd ~/backend.bikeottawa.ca
@@ -97,7 +97,7 @@ rm data/level_4.json
 
 echo "Syncing data directory...\n"
 
-rsync -rzaPq -e "ssh -i ~/.ssh/maps_id_rsa" data maps.bikeottawa.ca:/home/ubuntu/maps.bikeottawa.ca-backend/
+rsync -rzaPq -e "ssh -i ~/.ssh/maps_id_rsa" data ubuntu@172.31.40.27:/home/ubuntu/maps.bikeottawa.ca-backend/
 
 echo "============================================================="
 echo "====== SUCCESS! OSRM files in data/ have been synced ========"
