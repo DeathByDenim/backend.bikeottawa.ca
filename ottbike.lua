@@ -16,8 +16,8 @@ function setup()
     properties = {
       u_turn_penalty                = 20,
       traffic_light_penalty         = 2,
-      --weight_name                   = 'cyclability',
-      weight_name                   = 'duration',
+      weight_name                   = 'cyclability',
+      --weight_name                   = 'duration',
       process_call_tagless_node     = false,
       max_speed_for_map_matching    = 110/3.6, -- kmph -> m/s
       use_turn_restrictions         = false,
@@ -111,7 +111,7 @@ function setup()
     },
 
     service_penalties = {
-      alley             = 0.5,
+      parking_aisle             = 0.7,
     },
 
     bicycle_speeds = {
@@ -128,13 +128,13 @@ function setup()
       road = default_speed,
       service = default_speed,
       track = 12,
+      footway = default_speed,
       path = default_speed
     },
 
     pedestrian_speeds = {
-      footway = walking_speed,
       pedestrian = walking_speed,
-      steps = 2
+      steps = 1
     },
 
     railway_speeds = {
