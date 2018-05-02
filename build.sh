@@ -10,7 +10,7 @@ OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="PASTE YOUR MAPBOX TOKEN WITH WRITE ACCESS HERE"
 
-#cd ~/backend.bikeottawa.ca
+cd ~/backend.bikeottawa.ca
 
 if [ ! -e $OSMFILE ]; then
   echo "Error: Missing OSM file $OSMFILE"
