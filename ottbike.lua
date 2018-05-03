@@ -467,17 +467,17 @@ function handle_bicycle_tags(profile,way,result,data)
  local tracktype = way:get_value_by_key("tracktype")
  local smoothness = way:get_value_by_key("smoothness")
 
- if surface and surface_speeds[surface] then
-   result.forward_speed = math.min(surface_speeds[surface], result.forward_speed)
-   result.backward_speed = math.min(surface_speeds[surface], result.backward_speed)
+ if surface and profile.surface_speeds[surface] then
+   result.forward_speed = math.min(profile.surface_speeds[surface], result.forward_speed)
+   result.backward_speed = math.min(profile.surface_speeds[surface], result.backward_speed)
  end
- if tracktype and tracktype_speeds[tracktype] then
-   result.forward_speed = math.min(tracktype_speeds[tracktype], result.forward_speed)
-   result.backward_speed = math.min(tracktype_speeds[tracktype], result.backward_speed)
+ if tracktype and profile.tracktype_speeds[tracktype] then
+   result.forward_speed = math.min(profile.tracktype_speeds[tracktype], result.forward_speed)
+   result.backward_speed = math.min(profile.tracktype_speeds[tracktype], result.backward_speed)
  end
- if smoothness and smoothness_speeds[smoothness] then
-   result.forward_speed = math.min(smoothness_speeds[smoothness], result.forward_speed)
-   result.backward_speed = math.min(smoothness_speeds[smoothness], result.backward_speed)
+ if smoothness and profile.smoothness_speeds[smoothness] then
+   result.forward_speed = math.min(profile.smoothness_speeds[smoothness], result.forward_speed)
+   result.backward_speed = math.min(profile.smoothness_speeds[smoothness], result.backward_speed)
  end
 
   -- maxspeed
