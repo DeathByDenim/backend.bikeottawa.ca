@@ -102,9 +102,11 @@ function setup()
     -- reduce the driving speed by 30% for unsafe roads
     -- only used for cyclability metric
     unsafe_highway_list = {
+      trunk = 0.6,
       primary = 0.7,
       secondary = 0.75,
       tertiary = 0.8,
+      trunk_link = 0.6,
       primary_link = 0.7,
       secondary_link = 0.75,
       tertiary_link = 0.8,
@@ -124,6 +126,7 @@ function setup()
       tertiary_link = default_speed,
       trunk = default_speed,
       trunk_link = default_speed,
+      residential = default_speed,
       unclassified = default_speed,
       living_street = default_speed,
       road = default_speed,
