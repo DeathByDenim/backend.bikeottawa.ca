@@ -110,6 +110,7 @@ function setup()
       primary_link = 0.7,
       secondary_link = 0.75,
       tertiary_link = 0.8,
+      cycleway = 1.2
     },
 
     service_penalties = {
@@ -196,6 +197,11 @@ function setup()
     },
 
     smoothness_speeds = {
+      intermediate = default_speed * 0.9,
+      bad = default_speed * 0.75,
+      very_bad = default_speed * 0.7,
+      horrible = default_speed * 0.65,
+      very_horrible = default_speed * 0.6
     },
 
     avoid = Set {
