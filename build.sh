@@ -38,10 +38,25 @@ cp ../ltsanalyzer/levelfiles/level_4.json ./data
 
 echo "\nUploading tilesets to Mapbox...\n"
 $MAPBOX upload bikeottawa.7gev94ax data/level_1.json
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload tilesets to Mapbox."
+  exit 1
+fi
 $MAPBOX upload bikeottawa.2p4cgvm3 data/level_2.json
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload tilesets to Mapbox."
+  exit 1
+fi
 $MAPBOX upload bikeottawa.42dlr9v2 data/level_3.json
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload tilesets to Mapbox."
+  exit 1
+fi
 $MAPBOX upload bikeottawa.0ne8pnv3 data/level_4.json
-
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload tilesets to Mapbox."
+  exit 1
+fi
 
 echo "\nPreparing OSM extracts for each LTS...\n"
 export NVM_DIR="$HOME/.nvm"
@@ -53,12 +68,28 @@ mkdir data/lts3
 mkdir data/lts4
 echo "  Generating  data/lts1/data.osm"
 node prepare-osm.js $OSMFILE 1 > data/lts1/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to generate LTS-1 OSM."
+  exit 1
+fi
 echo "  Generating  data/lts2/data.osm"
 node prepare-osm.js $OSMFILE 2 > data/lts2/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to generate LTS-2 OSM."
+  exit 1
+fi
 echo "  Generating  data/lts3/data.osm"
 node prepare-osm.js $OSMFILE 3 > data/lts3/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to generate LTS-3 OSM."
+  exit 1
+fi
 echo "  Generating  data/lts4/data.osm"
 node prepare-osm.js $OSMFILE 4 > data/lts4/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to generate LTS-4 OSM."
+  exit 1
+fi
 
 echo "\nRunning OSRM scripts...\n"
 if [ ! -e lib ]; then
@@ -66,20 +97,52 @@ if [ ! -e lib ]; then
 fi
 echo "  Extracting  data/lts1/data.osrm"
 $OSRMEXTRACT data/lts1/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to extract."
+  exit 1
+fi
 echo "  Extracting  data/lts2/data.osrm"
 $OSRMEXTRACT data/lts2/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to extract."
+  exit 1
+fi
 echo "  Extracting  data/lts3/data.osrm"
 $OSRMEXTRACT data/lts3/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to extract."
+  exit 1
+fi
 echo "  Extracting  data/lts4/data.osrm"
 $OSRMEXTRACT data/lts4/data.osm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to extract."
+  exit 1
+fi
 echo "  Contracting  data/lts1/data.osrm"
 $OSRMCONTRACT data/lts1/data.osrm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to contract."
+  exit 1
+fi
 echo "  Contracting  data/lts2/data.osrm"
 $OSRMCONTRACT data/lts2/data.osrm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to contract."
+  exit 1
+fi
 echo "  Contracting  data/lts3/data.osrm"
 $OSRMCONTRACT data/lts3/data.osrm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to contract."
+  exit 1
+fi
 echo "  Contracting  data/lts4/data.osrm"
 $OSRMCONTRACT data/lts4/data.osrm
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to contract."
+  exit 1
+fi
 
 echo "\nDeleting OSM extracts and LTS jsons...\n"
 
@@ -93,12 +156,13 @@ rm data/level_3.json
 rm data/level_4.json
 
 
-
-
 echo "Syncing data directory...\n"
 
 rsync -rzaPq -e "ssh -i ~/.ssh/maps_id_rsa" data ubuntu@172.31.40.27:/home/ubuntu/maps.bikeottawa.ca-backend/
-
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload generated files to Maps server."
+  exit 1
+fi
 echo "============================================================="
 echo "====== SUCCESS! OSRM files in data/ have been synced ========"
 echo "=============================================================\n"
