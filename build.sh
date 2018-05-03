@@ -8,7 +8,7 @@ OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
-export MAPBOX_ACCESS_TOKEN="PASTE YOUR MAPBOX TOKEN WITH WRITE ACCESS HERE"
+export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
 
 cd ~/backend.bikeottawa.ca
 
