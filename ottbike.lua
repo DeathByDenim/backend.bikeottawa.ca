@@ -9,17 +9,17 @@ find_access_tag = require("lib/access").find_access_tag
 limit = require("lib/maxspeed").limit
 
 function setup()
-  local default_speed = 15
+  local default_speed = 20
   local walking_speed = 6
 
   return {
     properties = {
       u_turn_penalty                = 20,
-      traffic_light_penalty         = 2,
+      traffic_light_penalty         = 5,
       weight_name                   = 'cyclability',
       --weight_name                   = 'duration',
       process_call_tagless_node     = false,
-      max_speed_for_map_matching    = 110/3.6, -- kmph -> m/s
+      max_speed_for_map_matching    = 50/3.6, -- kmph -> m/s
       use_turn_restrictions         = false,
       continue_straight_at_waypoint = false
     },
@@ -133,7 +133,7 @@ function setup()
       road = default_speed,
       service = default_speed,
       track = 12,
-      footway = default_speed,
+      footway = default_speed*0.75,
       path = default_speed
     },
 
@@ -176,16 +176,16 @@ function setup()
       asphalt = default_speed,
       paved = default_speed,
       fine_gravel = default_speed,
-      ["cobblestone:flattened"] = 10,
-      paving_stones = 10,
-      compacted = 10,
-      cobblestone = 6,
+      paving_stones = 15,
+      ["cobblestone:flattened"] = 15,
+      compacted = 15,
+      concrete = 12,
       unpaved = 10,
       gravel = 10,
       pebblestone = 6,
+      cobblestone = 6,
       ground = 10,
       dirt = 10,
-      concrete = 10,
       earth = 6,
       grass = 6,
       mud = 3,
