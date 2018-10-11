@@ -53,7 +53,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-osmtogeojson $DESIRE_OSM > $DESIRE_JSON
+osmtogeojson $DESIRE_OSM > $DESIRE_JSON 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
   exit 1
