@@ -6,6 +6,10 @@ echo "========================================================"
 OSMFILE=../ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
+DESIRE_QUERY=./desire/desire.query
+DESIRE_OSM=./desire/desire.osm
+DESIRE_JSON=./desire/desire.json
+
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
@@ -24,6 +28,36 @@ fi
 
 if ! [ -x "$(command -v $OSRMCONTRACT)" ]; then
   echo "Error: Missing OSRM. Install using 'npm install osrm@5.15.1'\n"
+  exit 1
+fi
+
+echo "\nDownloading desire lines data ..."
+
+if [ ! -e $DESIRE_QUERY ]; then
+  echo "Error: Missing query file $DESIRE_QUERY"
+  exit 1
+fi
+
+if [ -e $DESIRE_OSM ]; then
+   rm $DESIRE_OSM
+fi
+
+wget -nv -O $DESIRE_OSM --post-file=$DESIRE_QUERY "http://overpass-api.de/api/interpreter"
+
+if [ $? -ne 0 ]; then
+  echo "Error: There was a problem running wget."
+  exit 1
+fi
+
+osmtogeojson $DESIRE_OSM $DESIRE_JSON
+if [ $? -ne 0 ]; then
+  echo "Error: There was a problem running osmtogeojson."
+  exit 1
+fi
+
+$MAPBOX upload bikeottawa.4hnbbuhd $DESIRE_JSON
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload desire lines tileset to Mapbox."
   exit 1
 fi
 
