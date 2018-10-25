@@ -31,7 +31,7 @@ if ! [ -x "$(command -v $OSRMCONTRACT)" ]; then
   exit 1
 fi
 
-echo "\nDownloading desire lines data ..."
+echo "\Processing and uploading desire lines data ..."
 
 if [ ! -e $DESIRE_QUERY ]; then
   echo "Error: Missing query file $DESIRE_QUERY"
@@ -53,7 +53,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-osmtogeojson $DESIRE_OSM > $DESIRE_JSON 
+/usr/local/bin/osmtogeojson $DESIRE_OSM > $DESIRE_JSON
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
   exit 1
