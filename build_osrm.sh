@@ -22,7 +22,7 @@ fi
 
 echo "\nCopying data files ... "
 
-rm -R ./data
+rm -fR ./data
 mkdir ./data
 cp ./bicycle-orig.lua ./data
 cp ../ltsanalyzer/levelfiles/level_*.json ./data
