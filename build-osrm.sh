@@ -4,7 +4,7 @@ echo "Starting routing build on `date`"
 echo "========================================================"
 
 OSMFILE=../ltsanalyzer/update/rmoc.osm
-OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike.lua"
+OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p ./ottbike2.lua"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 DESIRE_QUERY=./desire/desire.query
 DESIRE_OSM=./desire/desire.osm
