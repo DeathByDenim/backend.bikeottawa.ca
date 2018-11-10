@@ -11,14 +11,13 @@
     }
   ],
   "dependencies": {
-    "osrm": "5.19.0",
     "big-xml": "^1.0.0",
     "geojson-writer": "^0.3.6",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "osrm": "^5.19.0"
   },
-  "repository":
-    {
-      "type": "git",
-      "url": "git://github.com/zzptichka/backend.bikeottawa.ca.git"
-    }
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zzptichka/backend.bikeottawa.ca.git"
+  }
 }
