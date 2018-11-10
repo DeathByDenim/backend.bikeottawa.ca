@@ -5,7 +5,7 @@ echo "========================================================"
 
 OSRMPROFILE="ottbike2.lua"  #new version based on api ver 4
 OSMFILE=../ltsanalyzer/update/rmoc.osm
-OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING -p $OSRMPROFILE"
+OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 DESIRE_QUERY=./desire/desire.query
 DESIRE_OSM=./desire/desire.osm
@@ -97,7 +97,7 @@ echo "Running OSRM scripts..."
 for i in {1..4}
 do
   echo "  Extracting  lts$i/data.osrm"
-  $OSRMEXTRACT data/lts$i/data.osm
+  $OSRMEXTRACT -p $OSRMPROFILE data/lts$i/data.osm
   if [ $? -ne 0 ]; then
     echo "Error: Failed to extract."
     exit 1
@@ -115,6 +115,16 @@ do
   rm data/lts$i/data.osm
   rm data/level_$i.json
 done
+
+echo "Processing walking profile..."
+mkdir data/foot
+cp $OSMFILE data/foot/data.osm
+echo "  Extracting  foot/data.osrm"
+$OSRMEXTRACT -p foot.lua data/foot/data.osm
+echo "  Contracting  foot/data.osrm"
+$OSRMCONTRACT data/foot/data.osrm
+rm data/foot/data.osm
+
 
 echo "Syncing data directory..."
 
