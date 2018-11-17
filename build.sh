@@ -35,7 +35,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-/usr/local/bin/osmtogeojson $DESIRE_OSM > $DESIRE_JSON
+/usr/local/bin/osmtogeojson -m $DESIRE_OSM > $DESIRE_JSON
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson on desire lines file."
   exit 1
