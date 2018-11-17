@@ -7,8 +7,8 @@ WINTER_QUERY=./winter/winter.query
 WINTER_OSM=./winter/winter.osm
 WINTER_JSON=./winter/winter.json
 
-#MAPBOX=mapbox                 #for Mac
-MAPBOX=~/.local/bin/mapbox   #for Linux
+MAPBOX=mapbox                 #for Mac
+#MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
 
 cd ~/backend.bikeottawa.ca

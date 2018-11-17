@@ -1,7 +1,7 @@
 [out:xml][timeout:90];
 (
-  way["highway"="footway"]["footway"!="crossing"](area:3604136816);
-  way["highway"="path"](area:3604136816);
+  way["highway"="footway"]["footway"!="sidewalk"]["footway"!="crossing"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"](area:3604136816);
+  way["highway"="path"]["surface"!="ground"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"](area:3604136816);
   way["highway"="cycleway"](area:3604136816);
   way["highway"="steps"](area:3604136816);
 );
