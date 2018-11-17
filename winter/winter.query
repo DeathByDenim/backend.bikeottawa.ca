@@ -1,0 +1,9 @@
+[out:xml][timeout:90];
+(
+  way["highway"="footway"]["footway"!="crossing"](area:3604136816);
+  way["highway"="path"](area:3604136816);
+  way["highway"="cycleway"](area:3604136816);
+  way["highway"="steps"](area:3604136816);
+);
+(._;>;);
+out meta;
