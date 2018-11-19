@@ -1,9 +1,9 @@
 [out:xml][timeout:90];
 (
-  way["highway"="footway"]["footway"!="sidewalk"]["footway"!="crossing"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"](area:3604136816);
-  way["highway"="path"]["surface"!="ground"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"](area:3604136816);
-  way["highway"="cycleway"](area:3604136816);
-  way["highway"="steps"](area:3604136816);
+    way["highway"="footway"]["access"!="private"]["access"!="destination"]["footway"!="sidewalk"]["footway"!="crossing"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"](area:3604136816);
+    way["highway"="path"]["access"!="private"]["access"!="destination"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"](area:3604136816);
+    way["highway"="cycleway"](area:3604136816);
+    way["highway"="steps"]["access"!="private"]["access"!="destination"](area:3604136816);
 );
 (._;>;);
 out meta;
