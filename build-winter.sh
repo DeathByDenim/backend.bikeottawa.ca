@@ -14,7 +14,7 @@ OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 #OSMTOGEOJSON=osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
-PICKTAGS="winter_service surface width"
+PICKTAGS="winter_service surface width id"
 
 cd ~/backend.bikeottawa.ca
 
