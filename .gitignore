@@ -1,5 +1,8 @@
 data/*
-desire/*
+desire/desire.json
+desire/desire.osm
+winter/winter.json
+winter/winter.osm
 
 # Logs
 logs

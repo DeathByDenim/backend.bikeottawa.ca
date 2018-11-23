@@ -14,17 +14,7 @@ OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 #OSMTOGEOJSON=osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
-PICKTAGS="highway name smoothness winter_service surface width"
-
-if ! [ -x "$(command -v $OSMTOGEOJSON)" ]; then
-  echo 'Error: osmtogeojson is not installed.'
-  exit 1
-fi
-
-if ! [ -x "$(command -v $GEOJSONPICK)" ]; then
-  echo 'Error: osmtogeojson is not installed.'
-  exit 1
-fi
+PICKTAGS="winter_service surface width"
 
 cd ~/backend.bikeottawa.ca
 
@@ -45,7 +35,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-OSMTOGEOJSON -m $WINTER_OSM | GEOJSONPICK PICKTAGS > $WINTER_JSON
+$OSMTOGEOJSON -m $WINTER_OSM | $GEOJSONPICK $PICKTAGS > $WINTER_JSON
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."

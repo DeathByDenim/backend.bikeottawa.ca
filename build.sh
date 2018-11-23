@@ -17,6 +17,9 @@ WINTER_JSON=./winter/winter.json
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
+OSMTOGEOJSON=/usr/local/bin/osmtogeojson
+GEOJSONPICK=/usr/local/bin/geojson-pick
+PICKTAGS="winter_service surface width"
 
 cd ~/backend.bikeottawa.ca
 
@@ -71,7 +74,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-/usr/local/bin/osmtogeojson -m $WINTER_OSM > $WINTER_JSON
+$OSMTOGEOJSON -m $WINTER_OSM | $GEOJSONPICK $PICKTAGS > $WINTER_JSON
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
