@@ -7,9 +7,24 @@ WINTER_QUERY=./winter/winter.query
 WINTER_OSM=./winter/winter.osm
 WINTER_JSON=./winter/winter.json
 
-MAPBOX=mapbox                 #for Mac
-#MAPBOX=~/.local/bin/mapbox   #for Linux
+#MAPBOX=mapbox                 #for Mac
+MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
+OSMTOGEOJSON=/usr/local/bin/osmtogeojson
+#OSMTOGEOJSON=osmtogeojson
+GEOJSONPICK=/usr/local/bin/geojson-pick
+#GEOJSONPICK=geojson-pick
+PICKTAGS="highway name smoothness winter_service surface width"
+
+if ! [ -x "$(command -v $OSMTOGEOJSON)" ]; then
+  echo 'Error: osmtogeojson is not installed.'
+  exit 1
+fi
+
+if ! [ -x "$(command -v $GEOJSONPICK)" ]; then
+  echo 'Error: osmtogeojson is not installed.'
+  exit 1
+fi
 
 cd ~/backend.bikeottawa.ca
 
@@ -30,7 +45,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-/usr/local/bin/osmtogeojson -m $WINTER_OSM > $WINTER_JSON
+OSMTOGEOJSON -m $WINTER_OSM | GEOJSONPICK PICKTAGS > $WINTER_JSON
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
