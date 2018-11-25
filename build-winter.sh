@@ -1,11 +1,11 @@
 #!/bin/sh
 echo "========================================================"
-echo "Starting routing build on `date`"
+echo "Starting winter build on `date`"
 echo "========================================================"
 
-WINTER_QUERY=./winter/winter.query
-WINTER_OSM=./winter/winter.osm
-WINTER_JSON=./winter/winter.json
+WINTER_QUERY=./osm/winter.query
+WINTER_OSM=./osm/winter.osm
+WINTER_JSON=./osm/winter.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux

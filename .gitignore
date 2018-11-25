@@ -1,8 +1,10 @@
 data/*
-desire/desire.json
-desire/desire.osm
-winter/winter.json
-winter/winter.osm
+osm/desire.json
+osm/desire.osm
+osm/winter.json
+osm/winter.osm
+osm/pathways.json
+osm/pathways.osm
 
 # Logs
 logs

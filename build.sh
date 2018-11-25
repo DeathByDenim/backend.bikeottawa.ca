@@ -7,19 +7,23 @@ OSRMPROFILE="ottbike2.lua"  #new version based on api ver 4
 OSMFILE=../ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING"
 OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
-DESIRE_QUERY=./desire/desire.query
-DESIRE_OSM=./desire/desire.osm
-DESIRE_JSON=./desire/desire.json
-WINTER_QUERY=./winter/winter.query
-WINTER_OSM=./winter/winter.osm
-WINTER_JSON=./winter/winter.json
+DESIRE_QUERY=./osm/desire.query
+DESIRE_OSM=./osm/desire.osm
+DESIRE_JSON=./osm/desire.json
+WINTER_QUERY=./osm/winter.query
+WINTER_OSM=./osm/winter.osm
+WINTER_JSON=./osm/winter.json
+PATHWAYS_QUERY=./osm/pathways.query
+PATHWAYS_OSM=./osm/pathways.osm
+PATHWAYS_JSON=./osm/pathways.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
 OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
-PICKTAGS="winter_service winter_service:quality surface width id"
+WINTER_PICKTAGS="winter_service winter_service:quality surface width id"
+PATHWAYS_PICKTAGS="winter_service surface width smoothness lit id"
 
 cd ~/backend.bikeottawa.ca
 
@@ -74,7 +78,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-$OSMTOGEOJSON -m $WINTER_OSM | $GEOJSONPICK $PICKTAGS > $WINTER_JSON
+$OSMTOGEOJSON -m $WINTER_OSM | $GEOJSONPICK $WINTER_PICKTAGS > $WINTER_JSON
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
@@ -87,6 +91,37 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "Success!"
+
+echo "Processing and uploading ALL pathways data ..."
+
+if [ ! -e $PATHWAYS_QUERY ]; then
+  echo "Error: Missing pathways query file $PATHWAYS_QUERY"
+  exit 1
+fi
+
+rm $PATHWAYS_OSM
+rm $PATHWAYS_JSON
+
+wget -nv -O $PATHWAYS_OSM --post-file=$PATHWAYS_QUERY "http://overpass-api.de/api/interpreter"
+
+if [ $? -ne 0 ]; then
+  echo "Error: There was a problem running wget."
+  exit 1
+fi
+
+$OSMTOGEOJSON -m $PATHWAYS_OSM | $GEOJSONPICK $PATHWAYS_PICKTAGS > $PATHWAYS_JSON
+
+if [ $? -ne 0 ]; then
+  echo "Error: There was a problem running osmtogeojson."
+  exit 1
+fi
+
+$MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_JSON
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to upload desire lines tileset to Mapbox."
+  exit 1
+fi
 echo "Success!"
 
 echo "Copying LTS and OSM data files ... "
