@@ -1,10 +1,6 @@
 data/*
-osm/desire.json
-osm/desire.osm
-osm/winter.json
-osm/winter.osm
-osm/pathways.json
-osm/pathways.osm
+osm/*.json
+osm/*.osm
 
 # Logs
 logs
