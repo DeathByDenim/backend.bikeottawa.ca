@@ -57,4 +57,4 @@ const statsFeature = {
 
 inFile.features.push(statsFeature);
 
-console.log(JSON.stringify(inFile, null, 2));
+console.log(JSON.stringify(inFile, null, 0));
