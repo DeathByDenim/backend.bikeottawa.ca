@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "big-xml": "^1.0.0",
+    "cheap-ruler": "^2.5.1",
     "geojson-writer": "^0.3.6",
     "minimist": "^1.2.0",
     "osrm": "^5.19.0"
