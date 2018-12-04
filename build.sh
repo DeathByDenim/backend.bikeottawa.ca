@@ -16,7 +16,7 @@ WINTER_JSON=./osm/winter.json
 PATHWAYS_QUERY=./osm/pathways.query
 PATHWAYS_OSM=./osm/pathways.osm
 PATHWAYS_JSON=./osm/pathways.json
-PATHWAYS_JSON_UP=./osm/pathways.json
+PATHWAYS_JSON_UP=./osm/pathways+.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
@@ -88,7 +88,7 @@ fi
 
 $MAPBOX upload bikeottawa.03jqtlpj $WINTER_JSON
 if [ $? -ne 0 ]; then
-  echo "Error: Failed to upload desire lines tileset to Mapbox."
+  echo "Error: Failed to upload winter pathways tileset to Mapbox."
   exit 1
 fi
 
@@ -123,7 +123,7 @@ node calc-stats.js $PATHWAYS_JSON > $PATHWAYS_UP_JSON
 
 $MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_UP_JSON
 if [ $? -ne 0 ]; then
-  echo "Error: Failed to upload desire lines tileset to Mapbox."
+  echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1
 fi
 echo "Success!"

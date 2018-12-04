@@ -8,13 +8,13 @@ PATHWAYS_OSM=./osm/pathways.osm
 PATHWAYS_JSON=./osm/pathways.json
 PATHWAYS_UP_JSON=./osm/pathways+.json
 
-#MAPBOX=mapbox                 #for Mac
-MAPBOX=~/.local/bin/mapbox   #for Linux
+MAPBOX=mapbox                 #for Mac
+#MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
-OSMTOGEOJSON=/usr/local/bin/osmtogeojson
-#OSMTOGEOJSON=osmtogeojson
-GEOJSONPICK=/usr/local/bin/geojson-pick
-#GEOJSONPICK=geojson-pick
+#OSMTOGEOJSON=/usr/local/bin/osmtogeojson
+OSMTOGEOJSON=osmtogeojson
+#GEOJSONPICK=/usr/local/bin/geojson-pick
+GEOJSONPICK=geojson-pick
 PATHWAYS_PICKTAGS="winter_service surface width smoothness lit id highway"
 
 cd ~/backend.bikeottawa.ca
@@ -48,6 +48,6 @@ node calc-stats.js $PATHWAYS_JSON > $PATHWAYS_UP_JSON
 
 $MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_UP_JSON
 if [ $? -ne 0 ]; then
-  echo "Error: Failed to upload desire lines tileset to Mapbox."
+  echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1
 fi

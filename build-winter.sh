@@ -44,6 +44,6 @@ fi
 
 $MAPBOX upload bikeottawa.03jqtlpj $WINTER_JSON
 if [ $? -ne 0 ]; then
-  echo "Error: Failed to upload desire lines tileset to Mapbox."
+  echo "Error: Failed to upload winter pathways tileset to Mapbox."
   exit 1
 fi
