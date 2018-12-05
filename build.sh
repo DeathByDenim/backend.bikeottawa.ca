@@ -23,8 +23,8 @@ MAPBOX=~/.local/bin/mapbox   #for Linux
 export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
 OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
-WINTER_PICKTAGS="winter_service winter_service:quality surface width id"
-PATHWAYS_PICKTAGS="winter_service surface width smoothness lit id"
+WINTER_PICKTAGS="winter_service winter_service:quality surface width id highway"
+PATHWAYS_PICKTAGS="winter_service surface width smoothness lit id highway"
 
 cd ~/backend.bikeottawa.ca
 
