@@ -16,7 +16,7 @@ WINTER_JSON=./osm/winter.json
 PATHWAYS_QUERY=./osm/pathways.query
 PATHWAYS_OSM=./osm/pathways.osm
 PATHWAYS_JSON=./osm/pathways.json
-PATHWAYS_JSON_UP=./osm/pathways+.json
+PATHWAYS_JSON_STATS=./osm/pathways+.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
@@ -103,7 +103,7 @@ fi
 
 rm $PATHWAYS_OSM
 rm $PATHWAYS_JSON
-rm $PATHWAYS_JSON_UP
+rm $PATHWAYS_JSON_STATS
 
 wget -nv -O $PATHWAYS_OSM --post-file=$PATHWAYS_QUERY "http://overpass-api.de/api/interpreter"
 
@@ -119,9 +119,9 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-node calc-stats.js $PATHWAYS_JSON > $PATHWAYS_UP_JSON
+node calc-stats.js $PATHWAYS_JSON > $PATHWAYS_JSON_STATS
 
-$MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_UP_JSON
+$MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_JSON_STATS
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1
