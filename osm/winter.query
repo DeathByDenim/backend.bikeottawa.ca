@@ -1,9 +1,9 @@
 [out:xml][timeout:90];
 (
-    way(44.927,-76.361,45.598,-75.052)["highway"="footway"]["access"!="private"]["access"!="destination"]["footway"!="sidewalk"]["footway"!="crossing"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"];
-    way(44.927,-76.361,45.598,-75.052)["highway"="path"]["access"!="private"]["access"!="destination"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"];
+    way(44.927,-76.361,45.598,-75.052)["highway"="footway"]["access"!="private"]["access"!="destination"]["footway"!="sidewalk"]["footway"!="crossing"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"][!"level"];
+    way(44.927,-76.361,45.598,-75.052)["highway"="path"]["access"!="private"]["access"!="destination"]["surface"!="ground"]["surface"!="sand"]["surface"!="unpaved"]["surface"!="grass"]["surface"!="dirt"][!"level"];
     way(44.927,-76.361,45.598,-75.052)["highway"="cycleway"];
-    way(44.927,-76.361,45.598,-75.052)["highway"="steps"]["access"!="private"]["access"!="destination"];
+    way(44.927,-76.361,45.598,-75.052)["highway"="steps"]["access"!="private"]["access"!="destination"][!"level"];
     way(44.927,-76.361,45.598,-75.052)["highway"="pedestrian"];
 );
 (._;>;);
