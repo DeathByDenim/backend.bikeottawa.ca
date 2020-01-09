@@ -1,0 +1,21 @@
+[out:xml][timeout:100];
+(
+nwr["amenity"="bicycle_parking"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="bicycle_repair_station"](44.927,-76.361,45.598,-75.052);
+nwr["shop"="bicycle"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="pub"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="ice_cream"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="drinking_water"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="toilets"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="shelter"](44.927,-76.361,45.598,-75.052);
+nwr["leisure"="picnic_table"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="bbq"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="restaurant"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="fast_food"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="cafe"](44.927,-76.361,45.598,-75.052);
+nwr["amenity"="compressed_air"](44.927,-76.361,45.598,-75.052);
+nwr["playground"="splash_pad"](44.927,-76.361,45.598,-75.052);
+nwr[tourism=information](44.927,-76.361,45.598,-75.052);
+);
+(._;>;);
+out meta;
