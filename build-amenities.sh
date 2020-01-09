@@ -14,7 +14,7 @@ OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 #OSMTOGEOJSON=osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
-PICKTAGS="amenity playground leisure tourism shop name lit bicycle_parking covered capacity service:bicycle:repair service:bicycle:pump service:bicycle:chain_tool cuisine outdoor_seating phone website takeaway indoor fuel bottle seasonal fee description information fixme"
+PICKTAGS="id amenity playground leisure tourism shop name lit bicycle_parking covered capacity service:bicycle:repair service:bicycle:pump service:bicycle:chain_tool cuisine outdoor_seating phone website takeaway indoor fuel bottle seasonal fee description information fixme"
 
 cd ~/backend.bikeottawa.ca
 
