@@ -17,6 +17,7 @@ nwr["amenity"="compressed_air"](44.927,-76.361,45.598,-75.052);
 nwr["playground"="splash_pad"](44.927,-76.361,45.598,-75.052);
 nwr[tourism=information](44.927,-76.361,45.598,-75.052);
 nwr[tourism=viewpoint](44.927,-76.361,45.598,-75.052);
+nwr[amenity=telephone](44.927,-76.361,45.598,-75.052);
 );
 (._;>;);
 out meta;
