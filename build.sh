@@ -86,7 +86,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-$MAPBOX upload bikeottawa.03jqtlpj $WINTER_JSON
+$MAPBOX upload bikeottawa.0lwwjb4e $WINTER_JSON
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload winter pathways tileset to Mapbox."
   exit 1
