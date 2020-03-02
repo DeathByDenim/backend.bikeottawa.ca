@@ -3,9 +3,11 @@ echo "========================================================"
 echo "Starting amenities build on `date`"
 echo "========================================================"
 
-QUERY_FILE=./osm/amenities.query
-OSM_FILE=./osm/amenities.osm
-JSON_FILE=./osm/amenities.json
+NAME=amenities
+QUERY_FILE=./osm/$NAME.query
+OSM_FILE=./osm/$NAME.osm
+JSON_FILE=./osm/$NAME.json
+JSON_OLD_FILE=./osm/$NAME-old.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
@@ -26,7 +28,7 @@ if [ ! -e $QUERY_FILE ]; then
 fi
 
 rm $OSM_FILE
-rm $JSON_FILE
+mv $JSON_FILE $JSON_OLD_FILE
 
 wget -nv -O $OSM_FILE --post-file=$QUERY_FILE "http://overpass-api.de/api/interpreter"
 
@@ -40,6 +42,11 @@ $OSMTOGEOJSON -m $OSM_FILE | $GEOJSONPICK $PICKTAGS > $JSON_FILE
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
   exit 1
+fi
+
+if cmp -s $JSON_FILE $JSON_OLD_FILE; then
+    echo 'No changes'
+    exit 0
 fi
 
 $MAPBOX upload bikeottawa.6e5700mn $JSON_FILE

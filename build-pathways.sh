@@ -3,10 +3,12 @@ echo "========================================================"
 echo "Starting pathways build on `date`"
 echo "========================================================"
 
-PATHWAYS_QUERY=./osm/pathways.query
-PATHWAYS_OSM=./osm/pathways.osm
-PATHWAYS_JSON=./osm/pathways.json
-PATHWAYS_UP_JSON=./osm/pathways+.json
+NAME=pathways
+QUERY_FILE=./osm/$NAME.query
+OSM_FILE=./osm/$NAME.osm
+JSON_FILE=./osm/$NAME.json
+JSON_WITH_STATS=./osm/$NAME+.json
+JSON_WITH_STATS_OLD=./osm/$NAME-old.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
@@ -15,38 +17,43 @@ OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 #OSMTOGEOJSON=osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
-PATHWAYS_PICKTAGS="winter_service surface width smoothness lit id highway"
+PICKTAGS="winter_service surface width smoothness lit id highway"
 
 cd ~/backend.bikeottawa.ca
 
 echo "Processing and uploading ALL pathways data ..."
 
-if [ ! -e $PATHWAYS_QUERY ]; then
-  echo "Error: Missing pathways query file $PATHWAYS_QUERY"
+if [ ! -e $QUERY_FILE ]; then
+  echo "Error: Missing pathways query file $QUERY_FILE"
   exit 1
 fi
 
-rm $PATHWAYS_OSM
-rm $PATHWAYS_JSON
-rm $PATHWAYS_UP_JSON
+rm $OSM_FILE
+rm $JSON_FILE
+rm $JSON_WITH_STATS $JSON_WITH_STATS_OLD
 
-wget -nv -O $PATHWAYS_OSM --post-file=$PATHWAYS_QUERY "http://overpass-api.de/api/interpreter"
+wget -nv -O $OSM_FILE --post-file=$QUERY_FILE "http://overpass-api.de/api/interpreter"
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running wget."
   exit 1
 fi
 
-$OSMTOGEOJSON -m $PATHWAYS_OSM | $GEOJSONPICK $PATHWAYS_PICKTAGS > $PATHWAYS_JSON
+$OSMTOGEOJSON -m $OSM_FILE | $GEOJSONPICK $PICKTAGS > $JSON_FILE
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
   exit 1
 fi
 
-node calc-stats.js $PATHWAYS_JSON > $PATHWAYS_UP_JSON
+node calc-stats.js $JSON_FILE > $JSON_WITH_STATS
 
-$MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_UP_JSON
+if cmp -s $JSON_WITH_STATS $JSON_WITH_STATS_OLD; then
+    echo 'No changes'
+    exit 0
+fi
+
+$MAPBOX upload bikeottawa.6wnvt0cx $JSON_WITH_STATS
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1

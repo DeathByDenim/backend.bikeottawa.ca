@@ -3,9 +3,12 @@ echo "========================================================"
 echo "Starting winter build on `date`"
 echo "========================================================"
 
-WINTER_QUERY=./osm/winter.query
-WINTER_OSM=./osm/winter.osm
-WINTER_JSON=./osm/winter.json
+NAME=winter
+QUERY_FILE=./osm/$NAME.query
+OSM_FILE=./osm/$NAME.osm
+JSON_FILE=./osm/$NAME.json
+JSON_OLD_FILE=./osm/$NAME-old.json
+
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
@@ -20,29 +23,34 @@ cd ~/backend.bikeottawa.ca
 
 echo "Processing and uploading winter pathways data ..."
 
-if [ ! -e $WINTER_QUERY ]; then
-  echo "Error: Missing winter pathways query file $WINTER_QUERY"
+if [ ! -e $QUERY_FILE ]; then
+  echo "Error: Missing winter pathways query file $QUERY_FILE"
   exit 1
 fi
 
-rm $WINTER_OSM
-rm $WINTER_JSON
+rm $OSM_FILE
+mv $JSON_FILE $JSON_OLD_FILE
 
-wget -nv -O $WINTER_OSM --post-file=$WINTER_QUERY "http://overpass-api.de/api/interpreter"
+wget -nv -O $OSM_FILE --post-file=$QUERY_FILE "http://overpass-api.de/api/interpreter"
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running wget."
   exit 1
 fi
 
-$OSMTOGEOJSON -m $WINTER_OSM | $GEOJSONPICK $PICKTAGS > $WINTER_JSON
+$OSMTOGEOJSON -m $OSM_FILE | $GEOJSONPICK $PICKTAGS > $JSON_FILE
 
 if [ $? -ne 0 ]; then
   echo "Error: There was a problem running osmtogeojson."
   exit 1
 fi
 
-$MAPBOX upload bikeottawa.0lwwjb4e $WINTER_JSON
+if cmp -s $JSON_FILE $JSON_OLD_FILE; then
+    echo 'No changes'
+    exit 0
+fi
+
+$MAPBOX upload bikeottawa.0lwwjb4e $JSON_FILE
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload winter pathways tileset to Mapbox."
   exit 1
