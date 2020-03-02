@@ -30,7 +30,7 @@ fi
 
 rm $OSM_FILE
 rm $JSON_FILE
-rm $JSON_WITH_STATS $JSON_WITH_STATS_OLD
+mv $JSON_WITH_STATS $JSON_WITH_STATS_OLD
 
 wget -nv -O $OSM_FILE --post-file=$QUERY_FILE "http://overpass-api.de/api/interpreter"
 
