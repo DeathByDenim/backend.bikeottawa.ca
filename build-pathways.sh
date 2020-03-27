@@ -53,7 +53,7 @@ if cmp -s $JSON_WITH_STATS $JSON_WITH_STATS_OLD; then
     exit 0
 fi
 
-$MAPBOX upload bikeottawa.6wnvt0cx $JSON_WITH_STATS
+$MAPBOX upload bikeottawa.1bli4ynb $JSON_WITH_STATS
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1

@@ -1,6 +1,6 @@
 [out:xml][timeout:90];
 (
-    way(44.927,-76.361,45.598,-75.052)["highway"="footway"]["footway"!="crossing"]["footway"!="sidewalk"][!"level"];
+    way(44.927,-76.361,45.598,-75.052)["highway"="footway"]["footway"!="crossing"][!"level"];
     way(44.927,-76.361,45.598,-75.052)["highway"="path"];
     way(44.927,-76.361,45.598,-75.052)["highway"="cycleway"];
     way(44.927,-76.361,45.598,-75.052)["highway"="steps"][!"level"];
