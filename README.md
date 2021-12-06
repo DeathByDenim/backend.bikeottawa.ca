@@ -20,3 +20,16 @@ pip install --user mapboxcli
 - generates 4 separate OSM extracts (one for each LTS) based on LTS json files
 - builds OSRM routing data files for each LTS 
 - syncs generated OSRM data to maps.bikeottawa.ca
+
+
+## Tilesets
+
+- 0lwwjb4e - winter - 2,505 km
+- 1bli4ynb - pathways - 1,979 km
+- 6e5700mn  - amenities - 1,689 km
+- 4hnbbuhd - desire - 468 km
+- 0ne8pnv3 - lts4 - 5,583 km
+- 7gev94ax - lts1 - 2,876 km
+- 42dlr9v2 - lts3 - 5,592 km
+- 2p4cgvm3 - lts2 - 7,158 km
+- 6wnvt0cx - pathways(unused duplicate?) - 1,395 km
