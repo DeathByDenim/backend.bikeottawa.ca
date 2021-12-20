@@ -10,7 +10,7 @@ OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
-export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJja2FxY3I0YjEwODZhMnRucmVsMWc1emF2In0.7vkG51uoW7yMkbr6ZrGc1Q"
+export MAPBOX_ACCESS_TOKEN="[PRIVATE_MAPBOX_TOKEN]"
 
 cd ~/backend.bikeottawa.ca
 
