@@ -61,5 +61,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# Ignore workaround to make osrmextract work
+lib
+
 # Tokens and such
 secrets
