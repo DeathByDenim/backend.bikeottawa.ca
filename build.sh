@@ -3,8 +3,6 @@ echo "========================================================"
 echo "Starting routing build on `date`"
 echo "========================================================"
 
-source ./secrets
-
 OSRMPROFILE="ottbike2.lua"  #new version based on api ver 4
 OSMFILE=../ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING"
@@ -26,6 +24,12 @@ OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 WINTER_PICKTAGS="winter_service id"
 PATHWAYS_PICKTAGS="winter_service surface width smoothness lit id highway"
+
+if [ ! -f ./secrets ]; then
+  echo "Error: Missing secrets. Copy secrets.example"
+  exit 1
+fi
+source ./secrets
 
 cd ~/backend.bikeottawa.ca
 
@@ -179,6 +183,7 @@ echo "Running OSRM scripts..."
 for i in {1..4}
 do
   echo "  Extracting  lts$i/data.osrm"
+  echo "$OSRMEXTRACT -p $OSRMPROFILE data/lts$i/data.osm"
   $OSRMEXTRACT -p $OSRMPROFILE data/lts$i/data.osm
   if [ $? -ne 0 ]; then
     echo "Error: Failed to extract."

@@ -12,12 +12,17 @@ JSON_WITH_STATS_OLD=./osm/$NAME-old.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
-export MAPBOX_ACCESS_TOKEN="[PRIVATE_MAPBOX_TOKEN]"
 OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 #OSMTOGEOJSON=osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
 PICKTAGS="winter_service surface width smoothness lit id highway footway"
+
+if [ ! -f ./secrets ]; then
+  echo "Error: Missing secrets. Copy secrets.example"
+  exit 1
+fi
+. ./secrets
 
 cd ~/backend.bikeottawa.ca
 
@@ -53,7 +58,7 @@ if cmp -s $JSON_WITH_STATS $JSON_WITH_STATS_OLD; then
     exit 0
 fi
 
-$MAPBOX upload bikeottawa.1bli4ynb $JSON_WITH_STATS
+$MAPBOX upload ${MAPBOXUSERNAME}.1bli4ynb $JSON_WITH_STATS
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1

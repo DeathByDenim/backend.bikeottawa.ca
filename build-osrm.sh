@@ -10,7 +10,12 @@ OSRMCONTRACT="./node_modules/osrm/lib/binding/osrm-contract --verbosity WARNING"
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
-export MAPBOX_ACCESS_TOKEN="[PRIVATE_MAPBOX_TOKEN]"
+
+if [ ! -f ./secrets ]; then
+  echo "Error: Missing secrets. Copy secrets.example"
+  exit 1
+fi
+. ./secrets
 
 cd ~/backend.bikeottawa.ca
 
@@ -39,22 +44,22 @@ cp ../ltsanalyzer/levelfiles/level_3.json ./data
 cp ../ltsanalyzer/levelfiles/level_4.json ./data
 
 echo "\nUploading tilesets to Mapbox...\n"
-$MAPBOX upload bikeottawa.7gev94ax data/level_1.json
+$MAPBOX upload ${MAPBOXUSERNAME}.7gev94ax data/level_1.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
 fi
-$MAPBOX upload bikeottawa.2p4cgvm3 data/level_2.json
+$MAPBOX upload ${MAPBOXUSERNAME}.2p4cgvm3 data/level_2.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
 fi
-$MAPBOX upload bikeottawa.42dlr9v2 data/level_3.json
+$MAPBOX upload ${MAPBOXUSERNAME}.42dlr9v2 data/level_3.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
 fi
-$MAPBOX upload bikeottawa.0ne8pnv3 data/level_4.json
+$MAPBOX upload ${MAPBOXUSERNAME}.0ne8pnv3 data/level_4.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1

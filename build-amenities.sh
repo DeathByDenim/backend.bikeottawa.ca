@@ -11,12 +11,17 @@ JSON_OLD_FILE=./osm/$NAME-old.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
-export MAPBOX_ACCESS_TOKEN="[PRIVATE_MAPBOX_TOKEN]"
 OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 #OSMTOGEOJSON=osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
 PICKTAGS="id amenity leisure playground tourism shop craft name"
+
+if [ ! -f ./secrets ]; then
+  echo "Error: Missing secrets. Copy secrets.example"
+  exit 1
+fi
+. ./secrets
 
 cd ~/backend.bikeottawa.ca
 
@@ -49,7 +54,7 @@ if cmp -s $JSON_FILE $JSON_OLD_FILE; then
     exit 0
 fi
 
-$MAPBOX upload bikeottawa.6e5700mn $JSON_FILE
+$MAPBOX upload ${MAPBOXUSERNAME}.6e5700mn $JSON_FILE
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload amenities tileset to Mapbox."
   exit 1

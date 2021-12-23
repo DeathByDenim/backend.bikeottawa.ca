@@ -19,6 +19,12 @@ GEOJSONPICK=/usr/local/bin/geojson-pick
 #GEOJSONPICK=geojson-pick
 PICKTAGS="winter_service id"
 
+if [ ! -f ./secrets ]; then
+  echo "Error: Missing secrets. Copy secrets.example"
+  exit 1
+fi
+. ./secrets
+
 cd ~/backend.bikeottawa.ca
 
 echo "Processing and uploading winter pathways data ..."
@@ -50,7 +56,7 @@ if cmp -s $JSON_FILE $JSON_OLD_FILE; then
     exit 0
 fi
 
-$MAPBOX upload bikeottawa.0lwwjb4e $JSON_FILE
+$MAPBOX upload ${MAPBOXUSERNAME}.0lwwjb4e $JSON_FILE
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload winter pathways tileset to Mapbox."
   exit 1
