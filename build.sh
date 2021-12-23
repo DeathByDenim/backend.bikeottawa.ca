@@ -3,6 +3,8 @@ echo "========================================================"
 echo "Starting routing build on `date`"
 echo "========================================================"
 
+source ./secrets
+
 OSRMPROFILE="ottbike2.lua"  #new version based on api ver 4
 OSMFILE=../ltsanalyzer/update/rmoc.osm
 OSRMEXTRACT="./node_modules/osrm/lib/binding/osrm-extract --verbosity WARNING"
@@ -20,7 +22,6 @@ PATHWAYS_JSON_STATS=./osm/pathways+.json
 
 #MAPBOX=mapbox                 #for Mac
 MAPBOX=~/.local/bin/mapbox   #for Linux
-export MAPBOX_ACCESS_TOKEN="sk.eyJ1IjoiYmlrZW90dGF3YSIsImEiOiJjamdqbmR2YmYwYzIyMzNtbmtidDQyeXM0In0.PNr-pb7EPHOcZ2vjikeVFQ"
 OSMTOGEOJSON=/usr/local/bin/osmtogeojson
 GEOJSONPICK=/usr/local/bin/geojson-pick
 WINTER_PICKTAGS="winter_service id"
@@ -86,7 +87,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-$MAPBOX upload bikeottawa.0lwwjb4e $WINTER_JSON
+$MAPBOX upload ${MAPBOXUSERNAME}.0lwwjb4e $WINTER_JSON
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload winter pathways tileset to Mapbox."
   exit 1
@@ -121,7 +122,7 @@ fi
 
 node calc-stats.js $PATHWAYS_JSON > $PATHWAYS_JSON_STATS
 
-$MAPBOX upload bikeottawa.6wnvt0cx $PATHWAYS_JSON_STATS
+$MAPBOX upload ${MAPBOXUSERNAME}.6wnvt0cx $PATHWAYS_JSON_STATS
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload ALL pathways tileset to Mapbox."
   exit 1
@@ -135,22 +136,22 @@ mkdir data
 cp ../ltsanalyzer/levelfiles/level_*.json data
 
 echo "Uploading tilesets to Mapbox..."
-$MAPBOX upload bikeottawa.7gev94ax data/level_1.json
+$MAPBOX upload ${MAPBOXUSERNAME}.7gev94ax data/level_1.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
 fi
-$MAPBOX upload bikeottawa.2p4cgvm3 data/level_2.json
+$MAPBOX upload ${MAPBOXUSERNAME}.2p4cgvm3 data/level_2.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
 fi
-$MAPBOX upload bikeottawa.42dlr9v2 data/level_3.json
+$MAPBOX upload ${MAPBOXUSERNAME}.42dlr9v2 data/level_3.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
 fi
-$MAPBOX upload bikeottawa.0ne8pnv3 data/level_4.json
+$MAPBOX upload ${MAPBOXUSERNAME}.0ne8pnv3 data/level_4.json
 if [ $? -ne 0 ]; then
   echo "Error: Failed to upload tilesets to Mapbox."
   exit 1
