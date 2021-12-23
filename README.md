@@ -2,14 +2,20 @@
 Set of scripts to generate and sync data files for maps.bikeottawa.ca
 
 ## Installation
-Prerequisites: Node v6, Python v2.7
+Prerequisites: NodeJS, Python
 ``` 
-git clone https://github.com/zzptichka/backend.bikeottawa.ca
+git clone https://github.com/BikeOttawa/backend.bikeottawa.ca
 cd backend.bikeottawa.ca/
 npm install
 pip install --user mapboxcli
 ```
 
+You also need the rmoc.osm file and the LTS json files. These can be obtained using the LTSAnalyzer which is in the stressmodel repo at https://github.com/BikeOttawa/stressmodel
+
+The command for generating the json files compatible with the build scripts in this repo is
+```
+node main.js -f update/rmoc.osm -d levelfiles -p level_ -z
+```
 ## Running
 ```
 ./build.sh >> build.log
